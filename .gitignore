@@ -1,0 +1,5 @@
+venve
+*.pyc
+staticfiles
+*.swp
+*.swo
