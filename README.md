@@ -8,3 +8,4 @@ TODO:
 
 -Think of a name
 
+-Email verification
