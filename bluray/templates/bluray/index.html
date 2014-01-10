@@ -1,32 +1,20 @@
 {% extends "base.html" %}
-{% load staticfiles %}
 {% block content %}
 	{% if movie_list %}
 		<ul>
 			{% for movie in movie_list %}
 				<li>{{movie.name}}</li>
-				<button type="button" class="btn btn-default">Track</button>
+				<button type="button" class="btn btn-success" onclick="track({{movie.id}}, 'track')">Track</button>
 			{% endfor %}
 		</ul>
 	{% else %}
 		<p> No movies </p>
 	{% endif %}
-
-
-	    <p>you <span id="upvote">agree</span> or <span id="downvote">disagree</span>? </p>
-	    <div id="target"> Click here </div>
-	</body>
 	<script>
-		function vote(kind) {	
-			$.getJSON("/track/", {pk:2, vote:kind}, function(result){
+		function track(id_in, track_or_not) {	
+			$.getJSON("/track/",{id:id_in, track:track_or_not}, function(result){
 				alert('hi');
 			});
-					}
-		function addClickHandlers(){
-			$("#upvote").click(function() { vote("up") });
-			$("#downvote").click(function() { vote("down") });
 		}
-
-		$(document).ready(addClickHandlers);
 	</script>
 {% endblock %}
