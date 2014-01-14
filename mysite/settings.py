@@ -35,9 +35,24 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', #for django registration
+    'django.contrib.humanize', #tag library
     'bluray', #the app
     'south', #migrations
+    'registration',
 )
+#need to define site_id for django.contrib.sites
+SITE_ID = 1
+
+#number of days given to activate
+ACCOUNT_ACTIVATION_DAYS = 7
+
+#email information
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'bingreminders@gmail.com'
+EMAIL_HOST_PASSWORD = 'bingreminder'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
