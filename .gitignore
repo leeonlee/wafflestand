@@ -1,4 +1,4 @@
-venve
+venv
 *.pyc
 staticfiles
 *.swp
