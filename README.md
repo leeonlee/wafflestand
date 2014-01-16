@@ -11,3 +11,5 @@ TODO:
 -~~Email verification~~
 
 -Make sure movie names match scraped page
+
+-Assign boolean values for released movies
