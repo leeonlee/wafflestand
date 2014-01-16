@@ -6,6 +6,7 @@ class Movie(models.Model):
 	name = models.CharField(max_length=100)
 	release = models.DateField(null=True, blank=True)
 	tracking = models.ManyToManyField(User)
+	released = models.BooleanField(default=False)
 
 	#basically the toString
 	def __unicode__(self):
