@@ -11,14 +11,15 @@ class Command(BaseCommand):
 	help = ''
 
 	def handle(self, *args, **options):
-		movies = Movie.objects.all()
+		movies = Movie.objects.filter(released=False)
 		release_today = []
 		today = datetime.date.today()
 		for movie in movies:
 			if movie.release != None:
-				print movie.release - today, movie.name
 				if movie.release - today <= datetime.timedelta(0):
 					release_today.append(movie)
+					movie.released = True
+					movie.save()
 
 		'''
 		Should either store release_today and send emails later or start sending out emails immediately
