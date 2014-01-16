@@ -12,4 +12,4 @@ TODO:
 
 -Make sure movie names match scraped page
 
--Assign boolean values for released movies
+-~~Assign boolean values for released movies~~
