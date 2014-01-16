@@ -6,6 +6,8 @@ dj-static==0.0.5
 django-registration==1.0
 django-toolbelt==0.0.1
 gunicorn==18.0
+lxml==3.2.5
+mechanize==0.2.5
 psycopg2==2.5.2
 static==0.4
 wsgiref==0.1.2
