@@ -24,5 +24,10 @@ class Command(BaseCommand):
 		'''
 		Should either store release_today and send emails later or start sending out emails immediately
 		'''
+		for movie in release_today:
+			email_list = []
+			for user in movie.tracking.all():
+				email_list.append(user.email)
 
-
+			print email_list
+		#do something with the emails
