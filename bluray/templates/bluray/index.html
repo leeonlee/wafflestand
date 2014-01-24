@@ -4,16 +4,18 @@
 		<div class="row">
 			{% for movie in movie_list %}
 				<div class="col-md-4">
-					<h2>{{movie.name}}</h2>
-					{% if movie.release %}
-						<p> {{movie.release|date:"M d Y"}}</p>
-					{% else %}
-						<p> No release date yet </p>
-					{% endif %}
+					<h2 class="text-center">{{movie.name}}</h2>
+					<p class="text-center">
+						{% if movie.release %}
+							{{movie.release|date:"M d Y"}}
+						{% else %}
+							No release date yet
+						{% endif %}
+					</p>
 					{% if movie.poster %}
-						<img src="{{movie.poster}}">
+						<img class='center-block' src="{{movie.poster}}">
 					{% endif %}
-					<button type="button" class="btn btn-success" onclick="track({{movie.id}}, 'track')">Track</button>
+					<button type="button" class="btn btn-success center-block" onclick="track({{movie.id}}, 'track')">Track</button>
 				</div>
 				{% if forloop.counter|divisibleby:3 %}
 					</div>

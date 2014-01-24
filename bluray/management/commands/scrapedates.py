@@ -3,6 +3,7 @@ from bluray.models import Movie
 import mechanize
 from lxml import html
 import time
+from datetime import datetime
 
 '''
 Scrape the dates of all movies in the database
@@ -29,17 +30,22 @@ class Command(BaseCommand):
 
 			for link in br.links():
 				if 'Blu-ray.com' in link.text:
-					print link.url, link.text
 					br.follow_link(link)
 					break
 
 			tree = html.fromstring(br.response().read())
-			try:
-				date = tree.xpath('//span[@style="color: #666666"]/a[@style="text-decoration: none; color: #666666"]/text()')[0]
-				movie.release = datetime.datetime.strptime(date, '%b %d, %Y').date() #convert string to datetime object to a date object
+			#try:
+			date = tree.xpath('//span[@style="color: #666666"]/a[@style="text-decoration: none; color: #666666"]/text()')
+			if date:
+				movie.release = datetime.strptime(date[0], '%b %d, %Y').date() #convert string to datetime object to a date object
+				print movie.release, movie.name
 				movie.save()
+			else:
+				print "No date - %s" %movie.name
+			'''
 			except: #if exception occurs, then there is no release date
+				print 'Either no release date or something happened'
 				pass
-
+			'''
 			time.sleep(10)
 		return
