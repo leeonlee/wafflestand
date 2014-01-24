@@ -34,18 +34,11 @@ class Command(BaseCommand):
 					break
 
 			tree = html.fromstring(br.response().read())
-			#try:
 			date = tree.xpath('//span[@style="color: #666666"]/a[@style="text-decoration: none; color: #666666"]/text()')
 			if date:
 				movie.release = datetime.strptime(date[0], '%b %d, %Y').date() #convert string to datetime object to a date object
-				print movie.release, movie.name
 				movie.save()
 			else:
 				print "No date - %s" %movie.name
-			'''
-			except: #if exception occurs, then there is no release date
-				print 'Either no release date or something happened'
-				pass
-			'''
 			time.sleep(10)
 		return
