@@ -10,6 +10,9 @@
 					{% else %}
 						<p> No release date yet </p>
 					{% endif %}
+					{% if movie.poster %}
+						<img src="{{movie.poster}}">
+					{% endif %}
 					<button type="button" class="btn btn-success" onclick="track({{movie.id}}, 'track')">Track</button>
 				</div>
 				{% if forloop.counter|divisibleby:3 %}
