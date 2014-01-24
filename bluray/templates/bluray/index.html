@@ -5,6 +5,11 @@
 			{% for movie in movie_list %}
 				<div class="col-md-4">
 					<h2>{{movie.name}}</h2>
+					{% if movie.release %}
+						<p> {{movie.release|date:"M d Y"}}</p>
+					{% else %}
+						<p> No release date yet </p>
+					{% endif %}
 					<button type="button" class="btn btn-success" onclick="track({{movie.id}}, 'track')">Track</button>
 				</div>
 				{% if forloop.counter|divisibleby:3 %}
