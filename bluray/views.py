@@ -5,7 +5,7 @@ from bluray.models import *
 # Create your views here.
 
 def index(request):
-	movie_list = Movie.objects.all()
+	movie_list = Movie.objects.filter(released=False)
 	context = {
 		'movie_list' : movie_list
 	}

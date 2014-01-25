@@ -1,9 +1,9 @@
 from django.core.management.base import BaseCommand, CommandError
 from bluray.models import Movie
-import mechanize
 from lxml import html
-import time
+import time, re
 from datetime import datetime
+import requests
 
 '''
 Scrape the dates of all movies in the database
@@ -13,32 +13,36 @@ class Command(BaseCommand):
 	help = ''
 
 	def handle(self, *args, **options):
-		br = mechanize.Browser()
-		br.set_handle_robots(False)
-		br.addheaders = [('User-agent', 'Mozilla/5.0')]
-
-		movies = Movie.objects.all()
-		'''
-		Since blu-ray.com doesnt give an easier way to go to a movie's link,
-		google it and follow the link
-		'''
+		movies = Movie.objects.filter(released=False)
 		for movie in movies:
-			br.open("http://google.com")
-			br.select_form(nr=0)
-			br.form['q'] = 'blu-ray.com %s' %movie.name
-			br.submit()
+			#Remove translated titles (usually in parentheses) because it screws with search
+			name_to_url = re.sub(r'\([^)]*\)', '', movie.name).replace(' ', '+')
+			name_to_url = "https://www.google.com/search?q=videoeta+" + name_to_url
+			page = requests.get(name_to_url)
+			tree = html.fromstring(page.text)
 
-			for link in br.links():
-				if 'Blu-ray.com' in link.text:
-					br.follow_link(link)
-					break
+			#example link '/url?q=http://videoeta.com/movie/138795/frozen/&sa=U&ei=bwTjUsmdMenNsQSLqoKgBg&ved=0CBsQFjAA&usg=AFQjCNFM8VRTW1cgtwEGibllvbKNdT4_dA'
+			link = tree.xpath('//h3[@class="r"]/a')[0].attrib['href']
+			start = link.find('http:')
+			end = link.find('&')
+			page = requests.get(link[start:end].replace('%3F', '?').replace('%3D', '=')) #take care of URL encoding
 
-			tree = html.fromstring(br.response().read())
-			date = tree.xpath('//span[@style="color: #666666"]/a[@style="text-decoration: none; color: #666666"]/text()')
+			tree = html.fromstring(page.text)
+			date = tree.xpath('//tr[@class="blu-ray"]/td[@class="value"]/text()')
 			if date:
-				movie.release = datetime.strptime(date[0], '%b %d, %Y').date() #convert string to datetime object to a date object
-				movie.save()
+				try:
+					#if the movie is already released, it will say Yes
+					if date[0] == "Yes":
+						movie.released = True
+						print 'Released -', movie.name
+					else:
+						#convert string to datetime object to a date object
+						movie.release = datetime.strptime(date[0], '%B %d, %Y').date()
+						print movie.release, movie.name
+					movie.save()
+				except:
+					print "No exact date -", movie.name
 			else:
-				print "No date - %s" %movie.name
+				print "No date -", movie.name
 			time.sleep(10)
 		return
