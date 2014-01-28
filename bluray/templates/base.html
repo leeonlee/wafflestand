@@ -5,6 +5,7 @@
 		<link href="{% static "bootstrap/css/bootstrap-theme.min.css" %}" rel="stylesheet" media="screen">
 		<link href="{% static "css/index.css" %}" rel="stylesheet" media="screen">
 		{% block extraheaders %} {% endblock %}
+		<title>{% block title %} {% endblock %}</title>
 	</head>
 	<body>
 		{% block content %} {% endblock %}
