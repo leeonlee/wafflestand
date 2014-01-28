@@ -5,3 +5,4 @@ staticfiles
 *.swo
 *.swn
 .DS_Store
+*.orig
