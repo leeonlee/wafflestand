@@ -16,7 +16,11 @@
 					{% if movie.poster %}
 						<img class='center-block' src="{{movie.poster}}">
 					{% endif %}
-					<button type="button" class="btn btn-success center-block" onclick="track({{movie.id}}, 'track')">Track</button>
+					{% if movie.name in user_tracking %}
+						<input type="button" value="Untrack" class="btn btn-warning center-block" onclick="track({{movie.id}}, this)"/>
+					{% else %}
+						<input type="button" value="Track" class="btn btn-success center-block" onclick="track({{movie.id}}, this)"/>
+					{% endif %}
 				</div>
 				{% if forloop.counter|divisibleby:3 %}
 					</div>

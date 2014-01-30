@@ -7,7 +7,8 @@ from bluray.models import *
 def index(request):
 	movie_list = Movie.objects.filter(released=False)
 	context = {
-		'movie_list' : movie_list
+		'user_tracking' : [movie.name for movie in request.user.movie_set.all()],
+		'movie_list' : movie_list,
 	}
 
 	return render(request, 'bluray/index.html', context)
@@ -16,7 +17,7 @@ def index(request):
 should probably make sure user is logged in
 '''
 def track(request):
-	results = {'success':False}
+	results = {'success':'False'}
 	if request.method == 'GET':
 		GET = request.GET
 		if GET.has_key('id') and GET.has_key('track'):
@@ -25,12 +26,13 @@ def track(request):
 			user = request.user
 
 			movie = Movie.objects.get(id=id_in)
-			if track == "track":
+			if track == "Track":
 				movie.tracking.add(user)
-			elif track == "untrack":
+			elif track == "Untrack":
 				movie.tracking.remove(user)
 			movie.save()
-			results = {'success':True}
+			success = '%s %s' %(user.username, track)
+			results = {'success':success}
 
 	jason = json.dumps(results)
 	return HttpResponse(jason, content_type='application/json')
