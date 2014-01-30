@@ -23,9 +23,7 @@ class Command(BaseCommand):
 
 			#example link '/url?q=http://videoeta.com/movie/138795/frozen/&sa=U&ei=bwTjUsmdMenNsQSLqoKgBg&ved=0CBsQFjAA&usg=AFQjCNFM8VRTW1cgtwEGibllvbKNdT4_dA'
 			link = tree.xpath('//h3[@class="r"]/a')[0].attrib['href']
-			start = link.find('http:')
-			end = link.find('&')
-			page = requests.get(link[start:end].replace('%3F', '?').replace('%3D', '=')) #take care of URL encoding
+			page = requests.get(re.search('q=(.*)&', link).string.replace('%3F', '?').replace('%3D', '='))
 
 			tree = html.fromstring(page.text)
 			date = tree.xpath('//tr[@class="blu-ray"]/td[@class="value"]/text()')
