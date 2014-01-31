@@ -6,8 +6,12 @@
 			{% for movie in movie_list %}
 				<div class="col-md-4">
 
-					<div class="movie-container">
-						<h3 class="movie-name text-center text-horizontal-align">{{movie.name}}</h3>
+					<div class="movie-container container">
+						<div class="movie-name">
+							<div class="text-bottom">
+								<h3 class="text-center">{{movie.name}}</h3>
+							</div>
+						</div>
 						<div class="movie-release">
 							<p class="text-center">
 								{% if movie.release %}
