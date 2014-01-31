@@ -1,3 +1,45 @@
+.movie-container{
+	border: 1px dashed black;
+	position:relative;
+	height: 450px;
+	width: 400px;
+}
+
+.movie-name{
+	position:relative;
+	height: 56px;
+	width: 100%;
+}
+
+.movie-release{
+	position:relative;
+	width: 100%;
+}
+
+.movie-poster-container{
+	position:relative;
+	border: 1px dashed black;
+	height: 300px;
+	width: 100%;
+}
+
+.movie-poster{
+	height: 270px;
+	width: auto;
+	margin-bottom: 10px;
+}
+
+.movie-track{
+	position:relative;
+}
+
+/*.text-horizontal-align {
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+}
+*/
+
 .container-margin{
 	margin-top: 50px;
 	margin-bottom: 50px;

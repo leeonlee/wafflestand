@@ -5,22 +5,32 @@
 		<div class="row">
 			{% for movie in movie_list %}
 				<div class="col-md-4">
-					<h2 class="text-center">{{movie.name}}</h2>
-					<p class="text-center">
-						{% if movie.release %}
-							{{movie.release|date:"M d Y"}}
-						{% else %}
-							No release date yet
-						{% endif %}
-					</p>
-					{% if movie.poster %}
-						<img class='center-block' src="{{movie.poster}}">
-					{% endif %}
-					{% if movie.name in user_tracking %}
-						<input type="button" value="Untrack" class="btn btn-warning center-block" onclick="track({{movie.id}}, this)"/>
-					{% else %}
-						<input type="button" value="Track" class="btn btn-success center-block" onclick="track({{movie.id}}, this)"/>
-					{% endif %}
+
+					<div class="movie-container">
+						<h3 class="movie-name text-center text-horizontal-align">{{movie.name}}</h3>
+						<div class="movie-release">
+							<p class="text-center">
+								{% if movie.release %}
+									{{movie.release|date:"M d Y"}}
+								{% else %}
+									No release date yet
+								{% endif %}
+							</p>
+						</div>
+						<div class="movie-poster">
+							{% if movie.poster %}
+								<img class='center-block movie-poster' src="{{movie.poster}}">
+							{% endif %}
+						</div>
+						<div class="movie-track">
+							{% if movie.name in user_tracking %}
+								<input type="button" value="Untrack" class="btn btn-warning center-block" onclick="track({{movie.id}}, this)"/>
+							{% else %}
+								<input type="button" value="Track" class="btn btn-success center-block" onclick="track({{movie.id}}, this)"/>
+							{% endif %}
+						</div>
+					</div>
+
 				</div>
 				{% if forloop.counter|divisibleby:3 %}
 					</div>
