@@ -6,16 +6,16 @@ from bluray.models import *
 
 def index(request):
 	movie_list = Movie.objects.filter(released=False)
-	context = {
-		'user_tracking' : [movie.name for movie in request.user.movie_set.all()],
-		'movie_list' : movie_list,
-	}
+	context = {}
+	context['movie_list'] = movie_list
+	if request.user.is_authenticated():
+		context['user_tracking'] = [movie.name for movie in request.user.movie_set.all()]
+	else:
+		context['user_tracking'] = []
 
 	return render(request, 'bluray/index.html', context)
 
-'''
-should probably make sure user is logged in
-'''
+# track button no longer shows up unless user is logged in
 def track(request):
 	results = {'success':'False'}
 	if request.method == 'GET':
