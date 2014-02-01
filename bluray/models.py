@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User #allow movie to keep track of users
+from django import forms
 
 # Create your models here.
 class Movie(models.Model):
@@ -15,3 +16,7 @@ class Movie(models.Model):
 
 	class Meta:
 		ordering = ('name',)
+
+class LoginForm(forms.Form):
+	email = forms.CharField(label=('Email'), max_length=30)
+	password = forms.CharField(label=('Password'), widget=forms.PasswordInput(render_value=False), max_length=30)

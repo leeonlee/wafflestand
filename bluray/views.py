@@ -36,3 +36,22 @@ def track(request):
 
 	jason = json.dumps(results)
 	return HttpResponse(jason, content_type='application/json')
+
+def login(request):
+	if request.method == 'POST':
+		form = LoginForm(request.POST)
+		if form.is_valid():
+			email = form.cleaned_data['email']
+			password = form.cleaned_data['password']
+			user = authenticate(email=email, password=password)
+			if user is not None:
+				login(request, user)
+
+			else:
+				#return error message
+				pass
+		else:
+			#return error message
+			pass
+	else:
+		form = LoginForm()
