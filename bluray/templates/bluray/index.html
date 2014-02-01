@@ -3,31 +3,6 @@
 {% block content %}
 	<div class="container container-margin theme-showcase">
 		<div class="row">
-			<button class="btn btn-primary" data-toggle="modal" data-target=".bs-modal-sm">Small modal</button>
-
-			<div class="modal fade bs-modal-sm">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title">Modal title</h4>
-						</div>
-						<form id="loginform" method="post">
-							<div class="modal-body">
-								<p class="text-danger" id="form-error"></p>
-								{% csrf_token %}
-								{{form.as_p}}
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="submit" class="btn btn-primary">Login</button>
-							</div>
-						</form>
-					</div><!-- /.modal-content -->
-				</div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
-		</div>
-		<div class="row">
 			{% for movie in movie_list %}
 				<div class="col-md-4">
 					<h2 class="text-center">{{movie.name}}</h2>
@@ -41,10 +16,15 @@
 					{% if movie.poster %}
 						<img class='center-block' src="{{movie.poster}}">
 					{% endif %}
-					{% if movie.name in user_tracking %}
-						<input type="button" value="Untrack" class="btn btn-warning center-block" onclick="track({{movie.id}}, this)"/>
+
+					{% if user.is_authenticated %}
+						{% if movie.name in user_tracking %}
+							<input type="button" value="Untrack" class="btn btn-warning center-block" onclick="track({{movie.id}}, this)"/>
+						{% else %}
+							<input type="button" value="Track" class="btn btn-success center-block" onclick="track({{movie.id}}, this)"/>
+						{% endif %}
 					{% else %}
-						<input type="button" value="Track" class="btn btn-success center-block" onclick="track({{movie.id}}, this)"/>
+						<button class="btn btn-primary center-block" data-toggle="modal" data-target=".bs-modal-sm">Log in to begin tracking</button>	
 					{% endif %}
 				</div>
 				{% if forloop.counter|divisibleby:3 %}
@@ -54,6 +34,27 @@
 			{% endfor %}
 		</div>
 	</div> <!-- /container -->
+	<div class="modal fade bs-modal-sm">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Modal title</h4>
+				</div>
+				<form id="loginform" method="post">
+					<div class="modal-body">
+						<p class="text-danger" id="form-error"></p>
+						{% csrf_token %}
+						{{form.as_p}}
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Login</button>
+					</div>
+				</form>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 	
 {% endblock %}
 {% block extrajs %}
