@@ -24,7 +24,7 @@
 							<input type="button" value="Track" class="btn btn-success center-block" onclick="track({{movie.id}}, this)"/>
 						{% endif %}
 					{% else %}
-						<button class="btn btn-primary center-block" data-toggle="modal" data-target=".bs-modal-sm">Log in to begin tracking</button>	
+						<button class="btn btn-primary center-block" data-toggle="modal" data-target=".bs-modal-sm">Log in</button>
 					{% endif %}
 				</div>
 				{% if forloop.counter|divisibleby:3 %}
@@ -34,12 +34,13 @@
 			{% endfor %}
 		</div>
 	</div> <!-- /container -->
+
 	<div class="modal fade bs-modal-sm">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Modal title</h4>
+					<h4 class="modal-title">Please Log In</h4>
 				</div>
 				<form id="loginform" method="post">
 					<div class="modal-body">
@@ -59,6 +60,5 @@
 {% endblock %}
 {% block extrajs %}
 	{% load staticfiles %}
-	<script type="text/javascript" src="{% static "bootstrap/js/bootstrap.js" %}"></script>
 	<script type="text/javascript" src="{% static "js/index.js" %}"></script>
 {% endblock %}
