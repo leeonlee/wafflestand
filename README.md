@@ -13,3 +13,5 @@ TODO:
 -Make sure movie names match scraped page
 
 -~~Assign boolean values for released movies~~
+
+-Sign off button, add things to the header/footer
