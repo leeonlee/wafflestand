@@ -37,9 +37,40 @@
 							</ul>
 						</li>
 					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+						{% if user.is_authenticated %}
+							<a href="/accounts/logout">Logout {{user.username}}</a>
+						{% else %}
+							<button class="btn btn-info navbar-btn" data-toggle="modal" data-target=".bs-modal-sm">Log in</button>
+						{% endif %}
+						</li>
+					</ul>
 				</div><!--/.nav-collapse -->
 			</div>
 		</div>
+		<div class="modal fade bs-modal-sm">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Please Log In</h4>
+					</div>
+					<form id="loginform" method="post">
+						<div class="modal-body">
+							<p class="text-danger" id="form-error"></p>
+							{% csrf_token %}
+							{{form.as_p}}
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Login</button>
+						</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
 		{% block content %} {% endblock %}
 		<div id="footer">
 			<div class="container">
