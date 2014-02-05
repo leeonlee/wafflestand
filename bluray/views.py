@@ -6,10 +6,16 @@ from bluray.models import *
 
 def index(request):
 	movie_list = Movie.objects.filter(released=False)
-	context = {
-		'user_tracking' : [movie.name for movie in request.user.movie_set.all()],
-		'movie_list' : movie_list,
-	}
+	try:
+		context = {
+			'user_tracking' : [movie.name for movie in request.user.movie_set.all()],
+			'movie_list' : movie_list,
+		}
+	except:
+		context = {
+			'user_tracking' : [],
+			'movie_list' : movie_list,
+		}
 
 	return render(request, 'bluray/index.html', context)
 
