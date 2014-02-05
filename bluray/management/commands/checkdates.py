@@ -18,6 +18,7 @@ class Command(BaseCommand):
 			print 'Checking', movie.name
 			if movie.release != None:
 				if movie.release - today <= datetime.timedelta(0):
+					print movie.name, 'releasing'
 					release_today.append(movie)
 					movie.released = True
 					movie.save()
