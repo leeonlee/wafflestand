@@ -23,7 +23,8 @@ class Command(BaseCommand):
 
 			#example link '/url?q=http://videoeta.com/movie/138795/frozen/&sa=U&ei=bwTjUsmdMenNsQSLqoKgBg&ved=0CBsQFjAA&usg=AFQjCNFM8VRTW1cgtwEGibllvbKNdT4_dA'
 			link = tree.xpath('//h3[@class="r"]/a')[0].attrib['href']
-			page = requests.get(re.search('q=(.*)&', link).string.replace('%3F', '?').replace('%3D', '='))
+			print link
+			page = requests.get(re.search('q=(.*)&s', link).group(1).replace('%3F', '?').replace('%3D', '='))
 
 			tree = html.fromstring(page.text)
 			date = tree.xpath('//tr[@class="blu-ray"]/td[@class="value"]/text()')

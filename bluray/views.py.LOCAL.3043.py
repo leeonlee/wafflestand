@@ -24,7 +24,9 @@ def index(request):
 
 	return render(request, 'bluray/index.html', context)
 
-# track button no longer shows up unless user is logged in
+'''
+should probably make sure user is logged in
+'''
 def track(request):
 	results = {'success':'False'}
 	if request.method == 'GET' and request.is_ajax():
