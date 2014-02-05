@@ -19,9 +19,7 @@ def index(request):
 
 	return render(request, 'bluray/index.html', context)
 
-'''
-should probably make sure user is logged in
-'''
+# track button no longer shows up unless user is logged in
 def track(request):
 	results = {'success':'False'}
 	if request.method == 'GET':
