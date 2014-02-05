@@ -35,6 +35,7 @@ class Command(BaseCommand):
 		for title in titles:
 			movie, created = Movie.objects.get_or_create(name=title.text)
 			if created:
+				print 'Created', movie.name
 				sleep(2)
 				link = 'http://www.rottentomatoes.com' + title.items()[1][1]
 				br.open(link)

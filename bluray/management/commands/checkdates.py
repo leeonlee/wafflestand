@@ -15,6 +15,7 @@ class Command(BaseCommand):
 		release_today = []
 		today = datetime.date.today()
 		for movie in movies:
+			print 'Checking', movie.name
 			if movie.release != None:
 				if movie.release - today <= datetime.timedelta(0):
 					release_today.append(movie)
