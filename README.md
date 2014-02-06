@@ -14,4 +14,6 @@ TODO:
 
 -~~Assign boolean values for released movies~~
 
--Sign off button, add things to the header/footer
+-~~Sign off button~~, add things to the header/footer
+
+-Recruit rachel
