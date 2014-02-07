@@ -16,4 +16,6 @@ TODO:
 
 -~~Sign off button~~, add things to the header/footer
 
--Recruit rachel
+-~~Recruit rachel~~
+
+-Remove popup on track
