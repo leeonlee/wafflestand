@@ -19,3 +19,7 @@ TODO:
 -~~Recruit rachel~~
 
 -Remove popup on track
+
+Notes:
+
+- Isolate check for user authentication from for loop improve efficiency? may sacrifice maintainability/readability
