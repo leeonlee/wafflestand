@@ -20,7 +20,7 @@ TODO:
 
 -~~Remove popup on track~~
 
--~~add Google Analytics to track shit~~
+-~~add Google Analytics to measure traffic~~
 
 -Focus on username textbox when log in is clicked
 
@@ -32,4 +32,4 @@ TODO:
 
 Notes:
 
-- Isolate check for user authentication from for to loop improve efficiency? may sacrifice maintainability/readability
+- Isolate check for user authentication from for loop to improve efficiency? may sacrifice maintainability/readability
