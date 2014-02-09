@@ -21,3 +21,7 @@ TODO:
 -Remove popup on track
 
 -add Google Analytics to track shit
+
+Notes:
+
+- Isolate check for user authentication from for to loop improve efficiency? may sacrifice maintainability/readability
