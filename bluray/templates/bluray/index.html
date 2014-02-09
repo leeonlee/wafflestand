@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block title %} Waffle Stand: Movies, Reviews, Releases &amp; More {% endblock %}
 {% block content %}
 	<div class="container container-margin theme-showcase">
@@ -6,11 +7,13 @@
 			{% for movie in movie_list %}
 				<div class="col-md-4">
 					<div class="movie-container container">
+
 						<div class="movie-name">
 							<div class="text-bottom">
 								<h3 class="text-center">{{movie.name}}</h3>
 							</div>
 						</div>
+
 						<div class="movie-release">
 							<p class="text-center">
 								{% if movie.release %}
@@ -20,11 +23,15 @@
 								{% endif %}
 							</p>
 						</div>
+
 						<div class="movie-poster">
 							{% if movie.poster %}
-								<img class='center-block movie-poster' src="{{movie.poster}}">
+								<img class="center-block movie-poster" src="{{movie.poster}}">
+							{% else %}
+								<img class="center-block movie-poster" src="{% static "img/poster-not-found-og.jpg" %}">
 							{% endif %}
 						</div>
+
 						<div class="movie-track">
 							<!-- user authentication here -->
 							{% if user.is_active %}
@@ -37,6 +44,7 @@
 								<input type="button" class="btn btn-success center-block" value="Track" data-toggle="modal" data-target="#loginmodal"/>
 							{% endif %}
 						</div>
+
 					</div>
 				</div>
 				{% if forloop.counter|divisibleby:3 %}
@@ -48,6 +56,5 @@
 	</div> <!-- /container -->
 {% endblock %}
 {% block extrajs %}
-	{% load staticfiles %}
 	<script type="text/javascript" src="{% static "js/index.js" %}"></script>
 {% endblock %}
