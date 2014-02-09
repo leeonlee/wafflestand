@@ -32,4 +32,4 @@ TODO:
 
 Notes:
 
-- Isolate check for user authentication from for to loop improve efficiency? may sacrifice maintainability/readability
+- Isolate check for user authentication from for loop to improve efficiency? may sacrifice maintainability/readability
