@@ -42,7 +42,7 @@
 						{% if user.is_authenticated %}
 						<a href="/accounts/logout">Logout {{user.username}}</a>
 						{% else %}
-							<a href="#loginmodal" class="navbar-link navbar-right" data-toggle="modal">Log in</a>
+							<a href="#loginmodal" class="navbar-link navbar-right" id="login" data-toggle="modal">Log in</a>
 						{% endif %}
 						</li>
 					</ul>
