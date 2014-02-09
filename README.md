@@ -32,7 +32,7 @@ TODO:
 
 -fix up registration page frontend
 
--Set up Codeship
+-~~Set up Codeship~~
 
 ![ScreenShot](https://www.codeship.io/projects/55164c60-73fc-0131-cfa6-0ac1c27b3fd0/status)
 
