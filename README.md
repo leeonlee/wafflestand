@@ -1,4 +1,4 @@
-something-flix
+Waffle Stand
 ==============
 TODO:
 
@@ -21,6 +21,14 @@ TODO:
 -~~Remove popup on track~~
 
 -~~add Google Analytics to track shit~~
+
+-Focus on username textbox when log in is clicked
+
+-180x270 poster not found
+
+-Turn DEBUG off
+
+-Check active instead of authenticated
 
 Notes:
 
