@@ -28,7 +28,7 @@ TODO:
 
 -Turn DEBUG off
 
--Check active instead of authenticated
+-~~Check active instead of authenticated~~
 
 Notes:
 
