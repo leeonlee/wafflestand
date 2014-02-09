@@ -24,7 +24,7 @@ TODO:
 
 -~~Focus on username textbox when log in is clicked~~
 
--180x270 poster not found
+-~~180x270 poster not found~~
 
 -Turn DEBUG off
 
