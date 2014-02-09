@@ -22,7 +22,7 @@ TODO:
 
 -~~add Google Analytics to measure traffic~~
 
--Focus on username textbox when log in is clicked
+-~~Focus on username textbox when log in is clicked~~
 
 -180x270 poster not found
 
@@ -33,3 +33,4 @@ TODO:
 Notes:
 
 - Isolate check for user authentication from for loop to improve efficiency? may sacrifice maintainability/readability
+- modal focus has quick fix. there's some strange behaviour with non-js click implementation
