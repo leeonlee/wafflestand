@@ -39,4 +39,3 @@ TODO:
 Notes:
 
 - Isolate check for user authentication from for loop to improve efficiency? may sacrifice maintainability/readability
-- modal focus has quick fix. there's some strange behaviour with non-js click implementation

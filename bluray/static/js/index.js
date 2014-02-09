@@ -9,11 +9,8 @@ function track(id_in, button) {
 
 $(document).ready(function() {
 	
-	$('#login').click(function(){	
-		$('#loginmodal').modal('show');
-		$('#loginmodal').on('shown.bs.modal', function(){
-			$('#id_username').focus()
-		});
+	$('#loginmodal').on('shown.bs.modal', function(){
+		$('#id_username').focus();
 	});
 
 	$('#loginform').submit(function() {
