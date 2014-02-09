@@ -30,6 +30,8 @@ TODO:
 
 -~~Check active instead of authenticated~~
 
+- fix up registration page frontend
+
 Notes:
 
 - Isolate check for user authentication from for loop to improve efficiency? may sacrifice maintainability/readability
