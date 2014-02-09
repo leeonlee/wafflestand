@@ -20,7 +20,7 @@ TODO:
 
 -~~Remove popup on track~~
 
--add Google Analytics to track shit
+-~~add Google Analytics to track shit~~
 
 Notes:
 
