@@ -30,7 +30,9 @@ TODO:
 
 -~~Check active instead of authenticated~~
 
-- fix up registration page frontend
+-fix up registration page frontend
+
+-Set up Codeship
 
 Notes:
 
