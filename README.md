@@ -19,3 +19,5 @@ TODO:
 -~~Recruit rachel~~
 
 -Remove popup on track
+
+-add Google Analytics to track shit
