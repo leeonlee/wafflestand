@@ -2,11 +2,11 @@ something-flix
 ==============
 TODO:
 
--Ajax
+-~~Ajax~~
 
 -~~Find sites to scrape~~
 
--Think of a name
+-~~Think of a name~~
 
 -~~Email verification~~
 
