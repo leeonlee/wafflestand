@@ -36,6 +36,12 @@ TODO:
 
 ![ScreenShot](https://www.codeship.io/projects/3b315cb0-7416-0131-e950-360014433773/status) 
 
+http://stackoverflow.com/questions/13394057/django-ajax-modal-login-registration
+
+-Hover over features
+
+-Trailer player
+
 Notes:
 
 - Isolate check for user authentication from for loop to improve efficiency? may sacrifice maintainability/readability
