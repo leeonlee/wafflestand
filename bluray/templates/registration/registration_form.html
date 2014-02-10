@@ -11,6 +11,7 @@
 
   <h2>Registration</h2>
   <h3>New to Waffle Stand? Sign up here!</h3>
+  <hr>
   
   <form method="post" action="" class="form-horizontal">
     {% csrf_token %}
@@ -53,9 +54,9 @@
         {{ form.password2 }}
       </div>
     </div>
-
+    <hr>
     <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
+      <div class="col-sm-offset-4 col-sm-10">
         <button type="submit" class="btn btn-default">Register &rarr;</button>
       </div>
     </div>
