@@ -13,6 +13,18 @@ $(document).ready(function() {
 		$('#id_username').focus();
 	});
 
+	$('#registerform').submit(function() {
+		$.ajax({
+			data: $(this).serialize(),
+			type: $(this).attr('method'),
+			url: "/registerview/",
+			success: function(response){
+				alert(response);
+			}
+		});
+		return false
+	});
+
 	$('#loginform').submit(function() {
 		$.ajax({
 			data: $(this).serialize(),

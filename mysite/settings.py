@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'bluray', #the app
     'south', #migrations
     'registration',
+    'bootstrapform',
 )
 #need to define site_id for django.contrib.sites
 SITE_ID = 1

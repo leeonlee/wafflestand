@@ -4,22 +4,27 @@ from django.http import HttpResponse
 import json
 from bluray.models import *
 from django.contrib.auth import authenticate, login, logout
+from registration.views import RegistrationView
+from registration.forms import RegistrationFormUniqueEmail
 # Create your views here.
 
 def index(request):
 	movie_list = Movie.objects.filter(released=False)
-	form = LoginForm()
+	login_form = LoginForm()
+	register_form = RegistrationFormUniqueEmail()
 	try:
 		context = {
 			'user_tracking' : [movie.name for movie in request.user.movie_set.all()],
 			'movie_list' : movie_list,
-			'form' : form,
+			'login_form' : login_form,
+			'register_form' : register_form,
 		}
 	except:
 		context = {
 			'user_tracking' : [],
 			'movie_list' : movie_list,
-			'form' : form,
+			'login_form' : login_form,
+			'register_form' : register_form,
 		}
 
 	return render(request, 'bluray/index.html', context)
@@ -60,6 +65,22 @@ def loginview(request):
 					results['success'] = 'success'
 				else:
 					results['success'] = 'validate'
+
+	response = json.dumps(results)
+	return HttpResponse(response, content_type='application/json')
+
+def registerview(request):
+	results = {'success':'invalid'}
+	if request.method == 'POST':
+		form = RegistrationFormUniqueEmail(request.POST)
+		print 'form', form
+		print 'is valid', form.is_valid()
+		print 'cleaned data', form.cleaned_data
+		if form.is_valid():
+			RegistrationView.register(request, form.cleaned_data)
+			results = {'success':'true'}
+		else:
+			pass
 
 	response = json.dumps(results)
 	return HttpResponse(response, content_type='application/json')
