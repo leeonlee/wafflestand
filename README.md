@@ -1,4 +1,4 @@
-Waffle Stand
+Waffle Stand 
 ==============
 TODO:
 
