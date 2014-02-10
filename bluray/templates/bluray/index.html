@@ -5,7 +5,7 @@
 	<div class="container container-margin theme-showcase">
 		<div class="row">
 			{% for movie in movie_list %}
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<div class="movie-container container">
 
 						<div class="movie-name">
@@ -47,7 +47,7 @@
 
 					</div>
 				</div>
-				{% if forloop.counter|divisibleby:3 %}
+				{% if forloop.counter|divisibleby:4 %}
 					</div>
 					<div class="row">
 				{% endif %}
