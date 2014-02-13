@@ -21,13 +21,14 @@ class Command(BaseCommand):
 		theaters = RT(API_KEY).movies('in_theaters', page_limit = 50)
 
 		for film in theaters:
-			movie, created = Movie.objects.get_or_create(name=film['title'])
+			movie, created = Movie.objects.get_or_create(rt_id=film['id'])
 			if created:
+				movie.name = film['title']
 				print 'Created', movie.name
 				# rt object should always have a posters key. value of posters is another list
 				poster = film['posters'].get('detailed', None)
 				# if there is poster on rt and its not a 'default' rt poster, that implies existence of real movie poster
 				if poster is not None and not re.search(".+poster_default.+", poster):
 					movie.poster = poster
-					movie.save()
+				movie.save()
 
