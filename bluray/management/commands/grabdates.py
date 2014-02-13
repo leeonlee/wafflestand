@@ -32,7 +32,7 @@ class Command(BaseCommand):
 				if release_date:
 					# RT release dates look like: 2014-02-13
 					rd = datetime.strptime(release_date, '%Y-%m-%d')
-					movie.release = datetime.strptime(rd.strftime("%B %d, %Y"), "%B %d, %Y")
+					movie.release = rd.date()
 					print movie.release, movie.name
 				else:
 					print "No exact date -", movie.name
