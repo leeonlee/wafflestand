@@ -89,15 +89,7 @@ USE_TZ = True
 # Parse database configuration from $DATABASE_URL
 # Try except needed to prevent codeship build fails
 import dj_database_url
-try:
-	DATABASES['default'] = dj_database_url.config(default='postgres://a:a@localhost/thedb')
-except:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.sqlite3',
-			'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-		}
-	}
+DATABASES['default'] = dj_database_url.config(default='postgres://a:a@localhost/thedb')
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
