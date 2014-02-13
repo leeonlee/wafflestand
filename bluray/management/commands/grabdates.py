@@ -28,19 +28,14 @@ class Command(BaseCommand):
 
 			try:
 				rt_object = RT(API_KEY).search(movie_name)
-				for result in rt_object:
-					release_date = result['release_dates'].get('dvd', None)
-					if release_date is not None:
-						release_date = datetime.strptime(release_date, '%Y-%m-%d').date()
-						if release_date - date.today() > timedelta(0):
-							# RT release dates look like: 2014-02-13
-							movie.release = release_date
-							movie.save()
-							print movie.release, movie.name
-							break
-					elif release_date is None:
-						print "No exact date -", movie.name
-						break
+				release_date = rt_object[0]['release_dates'].get('dvd', None)
+				if release_date:
+					# RT release dates look like: 2014-02-13
+					movie.release = datetime.strptime(release_date, '%Y-%m-%d').date()
+					movie.save()
+					print movie.release, movie.name
+				else:
+					print "No exact date -", movie.name
 			except Exception as e:
 				print str(movie_name) + ": " + str(e)
 

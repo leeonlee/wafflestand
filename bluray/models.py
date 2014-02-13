@@ -9,6 +9,7 @@ class Movie(models.Model):
 	tracking = models.ManyToManyField(User)
 	released = models.BooleanField(default=False)
 	poster = models.CharField(max_length=100, null=True, blank=True)
+	rt_id = models.CharField(max_length=10)
 
 	#basically the toString
 	def __unicode__(self):
