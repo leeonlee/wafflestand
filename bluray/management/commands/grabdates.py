@@ -24,20 +24,16 @@ class Command(BaseCommand):
 			movie_name = re.sub(r'\([^)]*\)', '', movie.name)
 			try:
 				rt_object = RT(API_KEY).search(movie_name)
-				if len(rt_object) == 0:
-					print movie_name
+				release_date = rt_object[0]['release_dates'].get('dvd', None)
+				if release_date:
+					rd = datetime.strptime(release_date, '%Y-%m-%d')
+					movie.release = datetime.strptime(rd.strftime("%B %d, %Y"), "%B %d, %Y")
+					print movie.release, movie.name
 				else:
-					release_date = rt_object[0]['release_dates'].get('dvd', None)
-					if release_date:
-						rd = datetime.strptime(release_date, '%Y-%m-%d')
-						movie.release = datetime.strptime(rd.strftime("%B %d, %Y"), "%B %d, %Y")
-						print movie.release, movie.name
-					else:
-						print "No exact date -", movie.name
+					print "No exact date -", movie.name
 				movie.save()
 			except Exception as e:
-				print e
-				print movie_name
+				print str(movie_name) + ": " + str(e)
 			count += 1
 
 
