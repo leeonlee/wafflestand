@@ -18,14 +18,19 @@ class Command(BaseCommand):
 		movies = Movie.objects.filter(released=False)
 		count = 0
 		for movie in movies:
-			# can't make more than 5 calls a second
+
+			# can't make more than 5 calls a second so wait a bit
 			if count % 5 == 0:
 				sleep(2)
+
+			# format movie to get rid of the translations and extra fluff
 			movie_name = re.sub(r'\([^)]*\)', '', movie.name)
+
 			try:
 				rt_object = RT(API_KEY).search(movie_name)
 				release_date = rt_object[0]['release_dates'].get('dvd', None)
 				if release_date:
+					# RT release dates look like: 2014-02-13
 					rd = datetime.strptime(release_date, '%Y-%m-%d')
 					movie.release = datetime.strptime(rd.strftime("%B %d, %Y"), "%B %d, %Y")
 					print movie.release, movie.name
@@ -34,6 +39,7 @@ class Command(BaseCommand):
 				movie.save()
 			except Exception as e:
 				print str(movie_name) + ": " + str(e)
+
 			count += 1
 
 
