@@ -24,7 +24,9 @@ class Command(BaseCommand):
 			movie, created = Movie.objects.get_or_create(name=film['title'])
 			if created:
 				print 'Created', movie.name
+				# rt object should always have a posters key. value of posters is another list
 				poster = film['posters'].get('detailed', None)
+				# if there is poster on rt and its not a 'default' rt poster, that implies existence of real movie poster
 				if poster is not None and not re.search(".+poster_default.+", poster):
 					movie.poster = poster
 					movie.save()
