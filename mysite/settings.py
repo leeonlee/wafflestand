@@ -66,13 +66,6 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'mysite.urls'
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -91,8 +84,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 
-
-#Parse database configuration from $DATABASE_URL
+# Database
+# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+# Parse database configuration from $DATABASE_URL
+# Try except needed to prevent codeship build fails
 import dj_database_url
 try:
 	DATABASES['default'] = dj_database_url.config(default='postgres://a:a@localhost/thedb')
