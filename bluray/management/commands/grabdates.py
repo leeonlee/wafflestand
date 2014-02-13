@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from bluray.models import Movie
 from rottentomatoes import RT
-from datetime import datetime
+from datetime import datetime, date, timedelta
 from time import sleep
 import re
 
@@ -28,15 +28,19 @@ class Command(BaseCommand):
 
 			try:
 				rt_object = RT(API_KEY).search(movie_name)
-				release_date = rt_object[0]['release_dates'].get('dvd', None)
-				if release_date:
-					# RT release dates look like: 2014-02-13
-					rd = datetime.strptime(release_date, '%Y-%m-%d')
-					movie.release = rd.date()
-					print movie.release, movie.name
-				else:
-					print "No exact date -", movie.name
-				movie.save()
+				for result in rt_object:
+					release_date = result['release_dates'].get('dvd', None)
+					if release_date is not None:
+						release_date = datetime.strptime(release_date, '%Y-%m-%d').date()
+						if release_date - date.today() > timedelta(0):
+							# RT release dates look like: 2014-02-13
+							movie.release = release_date
+							movie.save()
+							print movie.release, movie.name
+							break
+					elif release_date is None:
+						print "No exact date -", movie.name
+						break
 			except Exception as e:
 				print str(movie_name) + ": " + str(e)
 
