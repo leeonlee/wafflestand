@@ -23,12 +23,9 @@ class Command(BaseCommand):
 			if count % 5 == 0:
 				sleep(2)
 
-			# format movie to get rid of the translations and extra fluff
-			movie_name = re.sub(r'\([^)]*\)', '', movie.name)
-
 			try:
-				rt_object = RT(API_KEY).search(movie_name)
-				release_date = rt_object[0]['release_dates'].get('dvd', None)
+				rt_object = RT(API_KEY).info(movie.rt_id)
+				release_date = rt_object['release_dates'].get('dvd', None)
 				if release_date:
 					# RT release dates look like: 2014-02-13
 					movie.release = datetime.strptime(release_date, '%Y-%m-%d').date()
