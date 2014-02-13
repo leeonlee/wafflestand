@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from bluray.models import Movie
 import datetime
+from collections import defaultdict
 
 '''
 Checks the release dates of every movie in the database by subtracting future release date from today
@@ -23,12 +24,11 @@ class Command(BaseCommand):
 					movie.released = True
 					movie.save()
 
-		'''
-		Should either store release_today and send emails later or start sending out emails immediately
-		'''
-		email_list = []
+		#Should either store release_today and send emails later or start sending out emails immediately
+		email_list = defaultdict(list)
 		for movie in release_today:
-			email_list.extend([user.email for user in movie.tracking.all() if user.email not in email_list])
-			movie.tracking.clear()
-			print email_list
+			for user in movie.tracking.all():
+				email_list[user.email].append(movie.name)
 		#do something with the emails
+
+		
