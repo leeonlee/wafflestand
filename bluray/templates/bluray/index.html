@@ -36,9 +36,9 @@
 							<!-- user authentication here -->
 							{% if user.is_active %}
 								{% if movie.name in user_tracking %}
-									<input type="button" value="Untrack" class="btn btn-warning center-block" onclick="track({{movie.id}}, this)"/>
+									<input type="button" value="Untrack" class="btn btn-warning center-block" onclick="track({{movie.rt_id}}, this)"/>
 								{% else %}
-									<input type="button" value="Track" class="btn btn-success center-block" onclick="track({{movie.id}}, this)"/>
+									<input type="button" value="Track" class="btn btn-success center-block" onclick="track({{movie.rt_id}}, this)"/>
 								{% endif %}
 							{% else %}
 								<input type="button" class="btn btn-success center-block" value="Track" data-toggle="modal" data-target="#loginmodal"/>
