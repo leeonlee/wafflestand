@@ -35,7 +35,6 @@ def track(request):
 			user = request.user
 
 			movie = Movie.objects.get(rt_id=id_in)
-			print "Finding", id_in
 			if track == "Track":
 				movie.tracking.add(user)
 			elif track == "Untrack":
