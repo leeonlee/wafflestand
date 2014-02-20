@@ -86,17 +86,20 @@ USE_TZ = True
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+DATABASES = {}
+if os.environ.get('PG_USER') is None:
+	import dj_database_url
+	DATABASES['default'] = dj_database_url.config(default='postgres://a:a@localhost/thedb')
+else:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',
+			'NAME': 'test',
+			'USER': os.environ.get('PG_USER'),
+			'PASSWORD': os.environ.get('PG_PASSWORD'),
+			'HOST': '127.0.0.1',
+		}
 	}
-}
-# Parse database configuration from $DATABASE_URL
-# Try except needed to prevent codeship build fails
-import dj_database_url
-DATABASES['default'] = dj_database_url.config(default='postgres://a:a@localhost/thedb')
-
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -104,7 +107,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
-import os
 STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 
