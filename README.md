@@ -40,6 +40,8 @@ http://stackoverflow.com/questions/13394057/django-ajax-modal-login-registration
 
 -Trailer player
 
+-Add new email
+
 Notes:
 
 - Isolate check for user authentication from for loop to improve efficiency? may sacrifice maintainability/readability
