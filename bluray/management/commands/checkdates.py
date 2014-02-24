@@ -37,23 +37,26 @@ class Command(BaseCommand):
 			sendEmail(user)
 
 def sendEmail(user):
+	posters_formatted = ["<img src=" + '"' + movie_poster + '"' + ">" for movie_poster in email_list[user]]
 	sender = "thewafflestand@gmail.com"
 	pwd = "wafflestand1"
 	receiver = user
 	msg = MIMEMultipart('alternative')
-	msg['Subject'] = 'Waffle Stand Alert'
+	msg['Subject'] = 'Waffle Stand Movie Announcements'
 	msg['From'] = sender
 	msg['To'] = receiver
-	text = "Your movies are out! " + ', '.join(email_list[user])
+	text = "Aloha {username}! The movies you are following have been released! ".format(username = user.username) + ', '.join(email_list[user])
 	html = """
 		<html>
 			<head></head>
 			<body>
+				<p>Aloha {username}!</p>
+				<p>The movies you are following have been released!</p>
+				{movie_posters}
 				<img src="http://interfacelift.com/wallpaper/previews/03454_bonjourleman@2x.jpg">
-				<p>Hi!</p>
 			</body>
 		</html>
-	"""
+	""".format(username = user.username, movie_posters = posters_formatted)
 	part1 = MIMEText(text, 'plain')
 	part2 = MIMEText(html, 'html')
 	msg.attach(part1)
