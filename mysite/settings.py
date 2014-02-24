@@ -79,18 +79,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
-
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+isCodeship = os.getenv('PG_USER', None)
+isHeroku = os.getenv('DATABASE_URL', None)
+
 DATABASES = {}
-if os.environ.get('PG_USER') is None:
-	import dj_database_url
-	DATABASES['default'] = dj_database_url.config(default='postgres://a:a@localhost/thedb')
-else:
+if isCodeship is not None:
 	DATABASES = {
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -100,6 +95,12 @@ else:
 			'HOST': '127.0.0.1',
 		}
 	}
+else:
+	import dj_database_url
+	DATABASES['default'] = dj_database_url.config(default='postgres://a:a@localhost/thedb')
+	if isHeroku is not None:
+		DEBUG = False
+
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 

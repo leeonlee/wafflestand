@@ -42,6 +42,18 @@ http://stackoverflow.com/questions/13394057/django-ajax-modal-login-registration
 
 -Add new email
 
+-Add debug flag check thing
+
+-Change track to follow
+
+-Change look
+
+-Draw freaking waffle
+
+-Test API key
+
+-Test for movies past dates
+
 Notes:
 
 - Isolate check for user authentication from for loop to improve efficiency? may sacrifice maintainability/readability
