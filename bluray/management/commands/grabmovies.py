@@ -18,7 +18,7 @@ class Command(BaseCommand):
 	help = ''
 
 	def handle(self, *args, **options):
-		if datetime.today().isoweekday() == SCRAPE_DAY:
+		if datetime.today().isoweekday() != SCRAPE_DAY:
 			print "NOT SCRAPE DAY!!"
 			return
 
