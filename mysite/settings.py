@@ -118,3 +118,6 @@ STATICFILES_DIRS = (
 # Media Configuration
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
+
+SCRAPE_DAY = 6
+API_KEY = 'susmjjdwwmjwp3f437erdnd3'

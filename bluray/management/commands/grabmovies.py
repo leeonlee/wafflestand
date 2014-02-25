@@ -1,9 +1,11 @@
 from django.core.management.base import BaseCommand, CommandError
 from bluray.models import Movie
 from rottentomatoes import RT
+from django.conf import settings #API KEY and SCRAPE_DAY
 import re
 
-API_KEY = 'susmjjdwwmjwp3f437erdnd3'
+API_KEY = getattr(settings, "API_KEY", None)
+SCRAPE_DAY = getattr(settings, "SCRAPE_DAY", None)
 
 '''
 Method to generate new movie objects
@@ -16,6 +18,10 @@ class Command(BaseCommand):
 	help = ''
 
 	def handle(self, *args, **options):
+		if datetime.today().isoweekday() == SCRAPE_DAY:
+			print "NOT SCRAPE DAY!!"
+			return
+
 		# box_office = RT(API_KEY).movies('box_office', page_limit = 50)
 		# opening = RT(API_KEY).movies('opening', page_limit = 50)
 		theaters = RT(API_KEY).movies('in_theaters', page_limit = 50)

@@ -1,11 +1,13 @@
 from django.core.management.base import BaseCommand, CommandError
 from bluray.models import Movie
 from rottentomatoes import RT
-from datetime import datetime, date, timedelta
+from datetime import datetime
 from time import sleep
+from django.conf import settings #API KEY and SCRAPE_DAY
 import re
 
-API_KEY = 'susmjjdwwmjwp3f437erdnd3'
+SCRAPE_DAY = getattr(settings, "SCRAPE_DAY", None)
+API_KEY = getattr(settings, "API_KEY", None)
 
 '''
 Scrape the dates of all movies in the database
@@ -15,6 +17,9 @@ class Command(BaseCommand):
 	help = ''
 
 	def handle(self, *args, **options):
+		if datetime.today().isoweekday() == SCRAPE_DAY:
+			print "NOT SCRAPE DAY!!"
+			return
 		movies = Movie.objects.filter(released=False)
 		count = 0
 		for movie in movies:
