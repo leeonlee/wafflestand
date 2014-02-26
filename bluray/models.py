@@ -21,3 +21,6 @@ class Movie(models.Model):
 class LoginForm(forms.Form):
 	username = forms.CharField(label=('Username'), max_length=30)
 	password = forms.CharField(label=('Password'), widget=forms.PasswordInput(render_value=False), max_length=30)
+
+class ResetForm(forms.Form):
+	email = forms.CharField(label=('Email'), max_length=40)

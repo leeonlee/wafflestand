@@ -53,22 +53,31 @@
 		<div class="modal fade bs-modal-sm" id="loginmodal" tabindex="-1" aria-hidden="true">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
-					<div class="modal-header">
+					<div class="modal-body">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Please Log In</h4>
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#login-tab" data-toggle="tab">Login</a></li>
+							<li><a href="#register-tab" data-toggle="tab">Forgot Password?</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active" id="login-tab">
+								<form id="loginform" method="post">
+									<p class="text-danger" id="form-error"></p>
+									{% csrf_token %}
+									{{ login_form.as_p }}
+									<button type="submit" class="btn btn-primary">Login</button>
+								</form>
+							</div>
+							<div class="tab-pane" id="register-tab">
+								<form id="registerform" method="post">
+									</br>
+									{% csrf_token %}
+									{{ register_form.as_p }}
+									<button type="submit" class="btn btn-primary">Login</button>
+								</form>
+							</div>
+						</div>
 					</div>
-					<form id="loginform" method="post">
-						<div class="modal-body">
-							<p class="text-danger" id="form-error"></p>
-							{% csrf_token %}
-							{{form.as_p}}
-							<p>Not a user? <a href="/accounts/register">Start here.</a></p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Login</button>
-						</div>
-					</form>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->

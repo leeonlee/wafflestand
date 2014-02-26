@@ -8,7 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 
 def index(request):
 	movie_list = Movie.objects.filter(released=False)
-	form = LoginForm()
+	login_form = LoginForm()
+	register_form = ResetForm()
 	try:
 		context = {
 			'user_tracking' : [movie.name for movie in request.user.movie_set.all()],
