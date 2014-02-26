@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'bluray', #the app must be before auth to override the templates
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,7 +38,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites', #for django registration
     'django.contrib.humanize', #tag library
-    'bluray', #the app
     'south', #migrations
     'registration',
 )
