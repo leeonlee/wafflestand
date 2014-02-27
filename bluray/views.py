@@ -28,22 +28,22 @@ def index(request):
 	return render(request, 'bluray/index.html', context)
 
 # track button no longer shows up unless user is logged in
-def track(request):
+def follow(request):
 	results = {'success':'False'}
 	if request.method == 'GET' and request.is_ajax():
 		GET = request.GET
-		if GET.has_key('id') and GET.has_key('track'):
+		if GET.has_key('id') and GET.has_key('follow'):
 			id_in = int(GET['id'])
-			track = GET['track']
+			follow = GET['follow']
 			user = request.user
 
 			movie = Movie.objects.get(rt_id=id_in)
-			if track == "Track":
-				movie.tracking.add(user)
-			elif track == "Untrack":
-				movie.tracking.remove(user)
+			if follow == "Follow":
+				movie.following.add(user)
+			elif follow == "Unfollow":
+				movie.following.remove(user)
 			movie.save()
-			success = '%s %s' %(user.username, track)
+			success = '%s %s' %(user.username, follow)
 			results = {'success':success}
 
 	jason = json.dumps(results)

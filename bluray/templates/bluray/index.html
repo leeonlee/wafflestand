@@ -32,16 +32,16 @@
 							{% endif %}
 						</div>
 
-						<div class="movie-track">
+						<div class="movie-follow">
 							<!-- user authentication here -->
 							{% if user.is_active %}
 								{% if movie.name in user_tracking %}
-									<input type="button" value="Untrack" class="btn btn-warning center-block" onclick="track({{movie.rt_id}}, this)"/>
+									<input type="button" value="Unfollow" class="btn btn-warning center-block" onclick="follow({{movie.rt_id}}, this)"/>
 								{% else %}
-									<input type="button" value="Track" class="btn btn-success center-block" onclick="track({{movie.rt_id}}, this)"/>
+									<input type="button" value="Follow" class="btn btn-success center-block" onclick="follow({{movie.rt_id}}, this)"/>
 								{% endif %}
 							{% else %}
-								<input type="button" class="btn btn-success center-block" value="Track" data-toggle="modal" data-target="#loginmodal"/>
+								<input type="button" class="btn btn-success center-block" value="Follow" data-toggle="modal" data-target="#loginmodal"/>
 							{% endif %}
 						</div>
 

@@ -8,7 +8,7 @@ from registration.backends.default.views import RegistrationView
 
 
 urlpatterns = patterns('',
-    url(r'^track/$', views.track, name='track'),
+    url(r'^follow/$', views.follow, name='follow'),
     url(r'^loginview/$', views.loginview, name='login'),
     url(r'logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
 
