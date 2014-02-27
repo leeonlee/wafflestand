@@ -14,13 +14,15 @@ def index(request):
 		context = {
 			'user_tracking' : [movie.name for movie in request.user.movie_set.all()],
 			'movie_list' : movie_list,
-			'form' : form,
+			'login_form' : login_form,
+			'register_form' : register_form,
 		}
 	except:
 		context = {
 			'user_tracking' : [],
 			'movie_list' : movie_list,
-			'form' : form,
+			'login_form' : login_form,
+			'register_form': register_form,
 		}
 
 	return render(request, 'bluray/index.html', context)
