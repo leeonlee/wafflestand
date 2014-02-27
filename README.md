@@ -1,6 +1,6 @@
 Waffle Stand  
 ==============
-http://garmoncheg.blogspot.com.au/2012/07/django-resetting-passwords-with.html 
+
 TODO:
 
 -~~Ajax~~
