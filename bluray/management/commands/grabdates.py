@@ -4,7 +4,6 @@ from rottentomatoes import RT
 from datetime import datetime
 from time import sleep
 from django.conf import settings #API KEY and SCRAPE_DAY
-import sys
 import re
 
 SCRAPE_DAY = getattr(settings, "SCRAPE_DAY", None)
@@ -18,10 +17,6 @@ class Command(BaseCommand):
 	help = ''
 
 	def handle(self, *args, **options):
-		sys.stdout = open('logs/grabdates_log.txt', 'a')
-		sys.stderr = sys.stdout
-		print '----------------------'
-		print datetime.today()
 		if datetime.today().isoweekday() != SCRAPE_DAY:
 			print "NOT SCRAPE DAY!!"
 			return
@@ -47,3 +42,7 @@ class Command(BaseCommand):
 				print str(movie_name) + ": " + str(e)
 
 			count += 1
+
+
+
+

@@ -5,7 +5,6 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib
 import datetime
-import sys
 
 '''
 Checks the release dates of every movie in the database by subtracting future release date from today
@@ -16,10 +15,6 @@ class Command(BaseCommand):
 	help = ''
 
 	def handle(self, *args, **options):
-		sys.stdout = open('logs/checkdates_log.txt', 'a')
-		sys.stderr = sys.stdout
-		print '----------------------'
-		print datetime.datetime.today()
 		movies = Movie.objects.filter(released=False)
 		release_today = []
 		today = datetime.date.today()
