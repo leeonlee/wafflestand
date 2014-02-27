@@ -51,8 +51,8 @@ ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'bingreminders@gmail.com'
-EMAIL_HOST_PASSWORD = 'bingreminder'
+EMAIL_HOST_USER = 'thewafflestand@gmail.com'
+EMAIL_HOST_PASSWORD = 'wafflestand1'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
