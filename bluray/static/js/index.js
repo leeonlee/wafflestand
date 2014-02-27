@@ -13,7 +13,7 @@ $(document).ready(function() {
 		$('#id_username').focus();
 	});
 
-	$('#loginform').submit(function() {
+	$('#login_form').submit(function() {
 		$.ajax({
 			data: $(this).serialize(),
 			type: $(this).attr('method'),
@@ -27,6 +27,20 @@ $(document).ready(function() {
 					$('#form-error').html("Invalid credentials");
 				}
 			}
+		});
+		return false
+	});
+	$('#reset_form').submit(function() {
+		$.ajax({
+			data: $(this).serialize(),
+			type: $(this).attr('method'),
+			url: "/accounts/password/reset/",
+			beforeSend: function(xhr){
+				$('#reset-message').html("Please wait..");
+			}
+			
+		}).done(function(response){
+			$('#reset-message').html("Thank you. If an account exists for the provided email, you will receive further instructions to reset your password");
 		});
 		return false
 	});

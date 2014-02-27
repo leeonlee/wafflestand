@@ -61,19 +61,21 @@
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="login-tab">
-								<form id="loginform" method="post">
+								<form id="login_form" method="post">
 									<p class="text-danger" id="form-error"></p>
 									{% csrf_token %}
 									{{ login_form.as_p }}
+									<p>Not a user? <a href="/accounts/register">Start here.</a></p>	
 									<button type="submit" class="btn btn-primary">Login</button>
 								</form>
 							</div>
 							<div class="tab-pane" id="register-tab">
-								<form id="registerform" method="post">
+								<form id="reset_form" method="post">
 									</br>
 									{% csrf_token %}
-									{{ register_form.as_p }}
-									<button type="submit" class="btn btn-primary">Login</button>
+									{{ reset_form.as_p }}
+									<p class="text-info" id="reset-message"></p>
+									<button type="submit" class="btn btn-primary">Submit</button>
 								</form>
 							</div>
 						</div>

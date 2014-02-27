@@ -9,20 +9,20 @@ from django.contrib.auth import authenticate, login, logout
 def index(request):
 	movie_list = Movie.objects.filter(released=False)
 	login_form = LoginForm()
-	register_form = ResetForm()
+	reset_form = ResetForm()
 	try:
 		context = {
 			'user_tracking' : [movie.name for movie in request.user.movie_set.all()],
 			'movie_list' : movie_list,
 			'login_form' : login_form,
-			'register_form' : register_form,
+			'reset_form' : reset_form,
 		}
 	except:
 		context = {
 			'user_tracking' : [],
 			'movie_list' : movie_list,
 			'login_form' : login_form,
-			'register_form': register_form,
+			'reset_form': reset_form,
 		}
 
 	return render(request, 'bluray/index.html', context)
