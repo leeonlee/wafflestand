@@ -21,7 +21,7 @@ urlpatterns = patterns('',
     url(r'^accounts/register/$', RegistrationView.as_view(form_class=RegistrationFormUniqueEmail), name='registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
 
-    url(r'^intro/$', views.index, name='intro'),
+    url(r'^boxoffice/$', views.index, name='boxoffice'),
     url(r'^$', views.index, name='index'),
 
 )

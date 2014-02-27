@@ -3,56 +3,7 @@
 {% block title %} Waffle Stand: Movies, Reviews, Releases &amp; More {% endblock %}
 {% block content %}
 	<div class="container container-margin theme-showcase">
-		<div class="row">
-			{% for movie in movie_list %}
-				<div class="col-md-3">
-					<div class="movie-container container">
-
-						<div class="movie-name">
-							<div class="text-bottom">
-								<h3 class="text-center">{{movie.name}}</h3>
-							</div>
-						</div>
-
-						<div class="movie-release">
-							<p class="text-center">
-								{% if movie.release %}
-									{{movie.release|date:"M d Y"}}
-								{% else %}
-									No release date yet
-								{% endif %}
-							</p>
-						</div>
-
-						<div class="movie-poster">
-							{% if movie.poster %}
-								<img class="center-block movie-poster" src="{{movie.poster}}">
-							{% else %}
-								<img class="center-block movie-poster" src="{% static "img/poster-not-found-og.jpg" %}">
-							{% endif %}
-						</div>
-
-						<div class="movie-follow">
-							<!-- user authentication here -->
-							{% if user.is_active %}
-								{% if movie.name in user_tracking %}
-									<input type="button" value="Unfollow" class="btn btn-warning center-block" onclick="follow({{movie.rt_id}}, this)"/>
-								{% else %}
-									<input type="button" value="Follow" class="btn btn-success center-block" onclick="follow({{movie.rt_id}}, this)"/>
-								{% endif %}
-							{% else %}
-								<input type="button" class="btn btn-success center-block" value="Follow" data-toggle="modal" data-target="#loginmodal"/>
-							{% endif %}
-						</div>
-
-					</div>
-				</div>
-				{% if forloop.counter|divisibleby:4 %}
-					</div>
-					<div class="row">
-				{% endif %}
-			{% endfor %}
-		</div>
+		
 	</div> <!-- /container -->
 {% endblock %}
 {% block extrajs %}

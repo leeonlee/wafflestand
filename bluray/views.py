@@ -10,7 +10,6 @@ from django.contrib.auth import authenticate, login, logout
 
 def index(request):
 	html = 'bluray/' + resolve(request.path_info).url_name+ '.html'
-
 	movie_list = Movie.objects.filter(released=False)
 	login_form = LoginForm()
 	reset_form = ResetForm()
