@@ -35,8 +35,6 @@ TODO:
 
 -~~Set up Codeship~~
 
-http://stackoverflow.com/questions/13394057/django-ajax-modal-login-registration
-
 -Hover over features
 
 -Trailer player
