@@ -3,6 +3,7 @@ from bluray.models import Movie
 from rottentomatoes import RT
 from datetime import datetime
 from django.conf import settings #API KEY and SCRAPE_DAY
+import sys
 import re
 
 API_KEY = getattr(settings, "API_KEY", None)
@@ -19,10 +20,13 @@ class Command(BaseCommand):
 	help = ''
 
 	def handle(self, *args, **options):
+		sys.stdout = open('logs/grabmovies_log.txt', 'a')
+		sys.stderr = sys.stdout
+		print '----------------------'
+		print datetime.today()
 		if datetime.today().isoweekday() != SCRAPE_DAY:
 			print "NOT SCRAPE DAY!!"
 			return
-
 		# box_office = RT(API_KEY).movies('box_office', page_limit = 50)
 		# opening = RT(API_KEY).movies('opening', page_limit = 50)
 		theaters = RT(API_KEY).movies('in_theaters', page_limit = 50)
