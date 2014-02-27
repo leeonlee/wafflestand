@@ -1,15 +1,16 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.core.urlresolvers import reverse
+from django.core.urlresolvers import resolve
 import json
 from bluray.models import *
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
-def intro(request):
-	return render(request, 'bluray/intro.html')
-
 def index(request):
+	html = 'bluray/' + resolve(request.path_info).url_name+ '.html'
+
 	movie_list = Movie.objects.filter(released=False)
 	login_form = LoginForm()
 	reset_form = ResetForm()
@@ -28,7 +29,7 @@ def index(request):
 			'reset_form': reset_form,
 		}
 
-	return render(request, 'bluray/index.html', context)
+	return render(request, html, context)
 
 # track button no longer shows up unless user is logged in
 def follow(request):
