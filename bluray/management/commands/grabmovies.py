@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from bluray.models import Movie
 from rottentomatoes import RT
+from datetime import datetime
 from django.conf import settings #API KEY and SCRAPE_DAY
 import re
 
