@@ -6,6 +6,9 @@ from bluray.models import *
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
+def intro(request):
+	return render(request, 'bluray/intro.html')
+
 def index(request):
 	movie_list = Movie.objects.filter(released=False)
 	login_form = LoginForm()
