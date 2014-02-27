@@ -40,6 +40,18 @@
 	background-color: #f5f5f5;
 }
 
+#footer ul{
+	margin: 20px auto;
+	padding: 0;
+	display: table;
+	list-style: none;
+}
+
+#footer ul li{
+	float: left;
+	padding-right: 25px;
+}
+
 .container-margin{
 	margin-top: 50px;
 	margin-bottom: 50px;
