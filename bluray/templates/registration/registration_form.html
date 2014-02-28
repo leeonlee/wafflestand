@@ -1,66 +1,77 @@
-{% extends "registration/base.html" %}
+{% extends "base.html" %}
+{% load staticfiles %}
 
 {% block title %}Sign up{% endblock %}
 
+{% block extraheaders %}
+	<link href="{% static "css/registration.css" %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+
 {% block content %}
 
-<div class="col-md-6 col-md-offset-3" id="content-container">
-  {% if form.errors %}
-  <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
-  {% endif %}
+<div class="container container-margin theme-showcase">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3" id="content-container">
+		  {% if form.errors %}
+		  <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
+		  {% endif %}
 
-  <h2>Registration</h2>
-  <h3>New to Waffle Stand? Sign up here!</h3>
-  <hr>
-  
-  <form method="post" action="" class="form-horizontal">
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="id_username" class="col-sm-4 control-label">Username:</label>
-      <div class="col-sm-8">
-        {% if form.username.errors %}
-          <p class="errors">{{ form.username.errors.as_text }}</p>
-        {% endif %}
-        {{ form.username }}
-      </div>
-    </div>
+		  <h2>Registration</h2>
+		  <h3>New to Waffle Stand? Sign up here!</h3>
+		  <hr>
+		  
+		  <form method="post" action="" class="form-horizontal">
+		    {% csrf_token %}
+		    <div class="form-group">
+		      <label for="id_username" class="col-sm-4 control-label">Username:</label>
+		      <div class="col-sm-8">
+			{% if form.username.errors %}
+			  <p class="errors">{{ form.username.errors.as_text }}</p>
+			{% endif %}
+			{{ form.username }}
+		      </div>
+		    </div>
 
-    <div class="form-group">
-      <label for="id_email" class="col-sm-4 control-label">Email address:</label>
-      <div class="col-sm-8">
-        {% if form.email.errors %}
-          <p class="errors">{{ form.email.errors.as_text }}</p>
-        {% endif %}
-        {{ form.email }}
-      </div>
-    </div>
+		    <div class="form-group">
+		      <label for="id_email" class="col-sm-4 control-label">Email address:</label>
+		      <div class="col-sm-8">
+			{% if form.email.errors %}
+			  <p class="errors">{{ form.email.errors.as_text }}</p>
+			{% endif %}
+			{{ form.email }}
+		      </div>
+		    </div>
 
-    <div class="form-group">
-      <label for="id_password1" class="col-sm-4 control-label">Password:</label>
-      <div class="col-sm-8">
-        {% if form.password1.errors %}
-          <p class="errors">{{ form.password1.errors.as_text }}</p>
-        {% endif %}
-        {{ form.password1 }}
-      </div>
-    </div>
+		    <div class="form-group">
+		      <label for="id_password1" class="col-sm-4 control-label">Password:</label>
+		      <div class="col-sm-8">
+			{% if form.password1.errors %}
+			  <p class="errors">{{ form.password1.errors.as_text }}</p>
+			{% endif %}
+			{{ form.password1 }}
+		      </div>
+		    </div>
 
-    <div class="form-group">
-      <label for="id_password2" class="col-sm-4 control-label">Password (again):</label>
-      <div class="col-sm-8">
-        {% if form.password2.errors %}
-          <p class="errors">{{ form.password2.errors.as_text }}</p>
-        {% endif %}
-        {{ form.password2 }}
-      </div>
-    </div>
-    <hr>
-    <div class="form-group">
-      <div class="col-sm-offset-4 col-sm-10">
-        <button type="submit" class="btn btn-default">Register &rarr;</button>
-      </div>
-    </div>
+		    <div class="form-group">
+		      <label for="id_password2" class="col-sm-4 control-label">Password (again):</label>
+		      <div class="col-sm-8">
+			{% if form.password2.errors %}
+			  <p class="errors">{{ form.password2.errors.as_text }}</p>
+			{% endif %}
+			{{ form.password2 }}
+		      </div>
+		    </div>
+		    <hr>
+		    <div class="form-group">
+		      <div class="col-sm-offset-4 col-sm-10">
+			<button type="submit" class="btn btn-default">Register &rarr;</button>
+		      </div>
+		    </div>
 
-  </form>
-
+		  </form>
+		</div>
+	</div>
 </div>
+
+{% endblock %}
