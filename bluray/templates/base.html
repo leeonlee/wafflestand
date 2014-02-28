@@ -45,11 +45,19 @@
 							<li><a href="#register-tab" data-toggle="tab">Forgot Password?</a></li>
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane active" id="login-tab">
+							<div class="tab-pane active login-container" id="login-tab">
 								<form id="login_form" method="post">
 									<p class="text-danger" id="form-error"></p>
 									{% csrf_token %}
-									{{ login_form.as_p }}
+									<!--{{ login_form.as_p }}-->
+									<div id="username">
+										<label for="username">Username:</label>
+										<input type="text" id="username" name="username">
+									</div>
+									<div id="password">
+										<label for="password">Password:</label>
+										<input type="password" id="password" name="password">
+									</div>
 									<p>Not a user? <a href="/accounts/register">Start here.</a></p>	
 									<button type="submit" class="btn btn-primary">Login</button>
 								</form>
