@@ -11,8 +11,6 @@ TODO:
 
 -~~Email verification~~
 
--Make sure movie names match scraped page
-
 -~~Assign boolean values for released movies~~
 
 -~~Sign off button~~, add things to the header/footer
@@ -27,7 +25,7 @@ TODO:
 
 -~~180x270 poster not found~~
 
--Turn DEBUG off
+-~~Turn DEBUG off~~
 
 -~~Check active instead of authenticated~~
 
@@ -39,7 +37,7 @@ TODO:
 
 -Trailer player
 
--Add new email
+-~~Add new email~~
 
 -Add debug flag check thing
 

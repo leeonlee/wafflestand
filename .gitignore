@@ -6,3 +6,4 @@ staticfiles
 *.swn
 .DS_Store
 *.orig
+logs
