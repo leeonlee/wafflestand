@@ -32,7 +32,7 @@ class Command(BaseCommand):
 			email_list = defaultdict(list)
 			usernames = {}
 			for movie in release_today:
-				for user in movie.tracking.all():
+				for user in movie.following.all():
 					email_list[user.email].append(movie.name)
 					# this is redundant (quick fix)
 					usernames[user.email] = user.username
