@@ -51,8 +51,8 @@ ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'thewafflestand@gmail.com'
-EMAIL_HOST_PASSWORD = 'wafflestand1'
+EMAIL_HOST_USER = os.getenv(EMAIL_NAME, None)
+EMAIL_HOST_PASSWORD = os.getenv(EMAIL_PW, None)
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -120,4 +120,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
 
 SCRAPE_DAY = 6
-API_KEY = 'susmjjdwwmjwp3f437erdnd3'
+API_KEY = os.getenv('RT_API_KEY', None)
