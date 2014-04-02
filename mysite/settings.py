@@ -51,8 +51,8 @@ ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.getenv(EMAIL_NAME, None)
-EMAIL_HOST_PASSWORD = os.getenv(EMAIL_PW, None)
+EMAIL_HOST_USER = os.getenv("EMAIL_NAME", None)
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PW", None)
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
