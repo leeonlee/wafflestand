@@ -79,28 +79,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-isCodeship = os.getenv('PG_USER', None)
-isHeroku = os.getenv('DATABASE_URL', None)
-
-DATABASES = {}
-if isCodeship is not None:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.postgresql_psycopg2',
-			'NAME': 'test',
-			'USER': os.environ.get('PG_USER'),
-			'PASSWORD': os.environ.get('PG_PASSWORD'),
-			'HOST': '127.0.0.1',
-		}
-	}
-else:
-	import dj_database_url
-	DATABASES['default'] = dj_database_url.config(default='postgres://a:a@localhost/thedb')
-	if isHeroku is not None:
-		DEBUG = False
-
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -119,5 +97,30 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
 
-SCRAPE_DAY = 6
+SCRAPE_DAY = 3
 API_KEY = os.getenv('RT_API_KEY', None)
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+isCodeship = os.getenv('PG_USER', None)
+isHeroku = os.getenv('DATABASE_URL', None)
+
+if isCodeship is not None:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'test',
+            'USER': os.environ.get('PG_USER'),
+            'PASSWORD': os.environ.get('PG_PASSWORD'),
+            'HOST': '127.0.0.1',
+        }
+    }
+elif isHeroku is not None:
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config(default='')
+    DEBUG = False
