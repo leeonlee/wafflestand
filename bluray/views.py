@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import Http404
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 import json
@@ -7,7 +8,18 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 def index(request):
-	movie_list = Movie.objects.filter(released=False)
+	query = request.GET.get('q', '')
+	active = None
+
+	if query == 'comingSoon':
+		movie_list = Movie.objects.filter(released=False).exclude(release=None).order_by('release')
+		active = 'comingSoon'
+	elif query == '':
+		movie_list = Movie.objects.filter(released=False)
+		active = 'boxOffice'
+	else:
+		raise Http404
+
 	login_form = LoginForm()
 	reset_form = ResetForm()
 
@@ -15,17 +27,13 @@ def index(request):
 		'movie_list' : movie_list,
 		'login_form' : login_form,
 		'reset_form' : reset_form,
+		'active' : active,
 	}
 
 	if request.user.is_authenticated():
 		context['user_tracking'] = [movie.name for movie in request.user.movie_set.all()]
 
 	return render(request, 'bluray/index.html', context)
-
-def comingSoon(request):
-	movie_list = Movie.objects.exclude(released=False).order_by('release')
-	login_form = LoginForm()
-	reset_form = ResetForm()
 
 # track button no longer shows up unless user is logged in
 def follow(request):
