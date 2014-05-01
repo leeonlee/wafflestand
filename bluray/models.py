@@ -6,7 +6,7 @@ from django import forms
 class Movie(models.Model):
 	name = models.CharField(max_length=100)
 	release = models.DateField(null=True, blank=True)
-	following = models.ManyToManyField(User)
+	following = models.ManyToManyField(User, null=True, blank=True)
 	released = models.BooleanField(default=False)
 	poster = models.CharField(max_length=100, null=True, blank=True)
 	rt_id = models.CharField(max_length=10)
