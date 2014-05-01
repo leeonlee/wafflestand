@@ -14,6 +14,9 @@ def index(request):
 	if query == 'comingSoon':
 		movie_list = Movie.objects.filter(released=False).exclude(release=None).order_by('release')
 		active = 'comingSoon'
+	elif query == 'freshOut':
+		movie_list = Movie.objects.filter(released=True).order_by('-release')
+		active = 'freshOut'
 	elif query == '':
 		movie_list = Movie.objects.filter(released=False)
 		active = 'boxOffice'
