@@ -10,22 +10,22 @@ def index(request):
 	movie_list = Movie.objects.filter(released=False)
 	login_form = LoginForm()
 	reset_form = ResetForm()
-	try:
-		context = {
-			'user_tracking' : [movie.name for movie in request.user.movie_set.all()],
-			'movie_list' : movie_list,
-			'login_form' : login_form,
-			'reset_form' : reset_form,
-		}
-	except:
-		context = {
-			'user_tracking' : [],
-			'movie_list' : movie_list,
-			'login_form' : login_form,
-			'reset_form': reset_form,
-		}
+
+	context = {
+		'movie_list' : movie_list,
+		'login_form' : login_form,
+		'reset_form' : reset_form,
+	}
+
+	if request.user.is_authenticated():
+		context['user_tracking'] = [movie.name for movie in request.user.movie_set.all()]
 
 	return render(request, 'bluray/index.html', context)
+
+def comingSoon(request):
+	movie_list = Movie.objects.exclude(released=False).order_by('release')
+	login_form = LoginForm()
+	reset_form = ResetForm()
 
 # track button no longer shows up unless user is logged in
 def follow(request):
