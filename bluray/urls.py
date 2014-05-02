@@ -22,4 +22,5 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration.backends.default.urls')),
 
     url(r'^$', views.index, name='index'),
+    url(r'(?P<query>\w+)/$', views.index, name='index'),
 )

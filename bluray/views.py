@@ -7,19 +7,18 @@ from bluray.models import *
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
-def index(request):
-	query = request.GET.get('q', '')
-	active = None
+def index(request, query = 'index'):
+	movie_list = Movie.objects.all()
+	active = query
 
 	if query == 'comingSoon':
 		movie_list = Movie.objects.filter(released=False).exclude(release=None).order_by('release')
-		active = 'comingSoon'
 	elif query == 'freshOut':
 		movie_list = Movie.objects.filter(released=True).order_by('-release')
-		active = 'freshOut'
-	elif query == '':
+	elif query == 'myMovies':
+		movie_list = request.user.movie_set.all()
+	elif query == 'index':
 		movie_list = Movie.objects.filter(released=False)
-		active = 'boxOffice'
 	else:
 		raise Http404
 
