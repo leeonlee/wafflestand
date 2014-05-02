@@ -31,7 +31,7 @@
 								<img class="center-block movie-poster" src="{% static "img/poster-not-found-og.jpg" %}">
 							{% endif %}
 						</div>
-						{% if active != 'freshOut' %}
+						{% if movie.released == False %}
 							<div class="movie-follow">
 								<!-- user authentication here -->
 								{% if user.is_active %}
