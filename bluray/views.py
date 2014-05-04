@@ -10,7 +10,9 @@ from django.contrib.auth import authenticate, login, logout
 def index(request, query = 'index'):
 	movie_list = Movie.objects.all()
 	active = query
-
+	# sort parameter
+	sort = request.GET.get('sort_by', None)
+	
 	if query == 'comingSoon':
 		movie_list = Movie.objects.filter(released=False).exclude(release=None).order_by('release')
 	elif query == 'freshOut':
@@ -18,7 +20,10 @@ def index(request, query = 'index'):
 	elif query == 'myMovies':
 		movie_list = request.user.movie_set.all()
 	elif query == 'index':
-		movie_list = Movie.objects.filter(released=False)
+		if sort:
+			movie_list = Movie.objects.filter(released=False).order_by(sort)
+		else:
+			movie_list = Movie.objects.filter(released=False)			
 	else:
 		raise Http404
 
