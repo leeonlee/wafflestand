@@ -98,7 +98,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
 
 SCRAPE_DAY = 3
-API_KEY = os.getenv('RT_API_KEY', None)
+RT_API_KEY = os.getenv('RT_API_KEY', None)
 
 DATABASES = {
     'default': {

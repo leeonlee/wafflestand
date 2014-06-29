@@ -3,9 +3,10 @@ from bluray.models import Movie
 from rottentomatoes import RT
 from datetime import datetime
 from django.conf import settings #API KEY and SCRAPE_DAY
+from optparse import make_option
 import re
 
-API_KEY = getattr(settings, "API_KEY", None)
+RT_API_KEY = getattr(settings, "RT_API_KEY", None)
 SCRAPE_DAY = getattr(settings, "SCRAPE_DAY", None)
 
 '''
@@ -17,15 +18,22 @@ run once a week?
 '''
 class Command(BaseCommand):
 	help = ''
+	option_list = BaseCommand.option_list + (
+		make_option('--now', 		#Creates the flag '--now'
+		    action='store_true', 	#Stores True inside the specified destination
+		    dest='now', 		#Key destination for value to be saved into
+		    default=False,		
+		    help='Allow command to be run regardless of scrape day'),
+        )
 
 	def handle(self, *args, **options):
-		if datetime.today().isoweekday() != SCRAPE_DAY:
+		if datetime.today().isoweekday() != SCRAPE_DAY and not options['now']:
 			print "NOT SCRAPE DAY!!"
 			return
 
-		# box_office = RT(API_KEY).movies('box_office', page_limit = 50)
-		# opening = RT(API_KEY).movies('opening', page_limit = 50)
-		theaters = RT(API_KEY).movies('in_theaters', page_limit = 50)
+		# box_office = RT(RT_API_KEY).movies('box_office', page_limit = 50)
+		# opening = RT(RT_API_KEY).movies('opening', page_limit = 50)
+		theaters = RT(RT_API_KEY).movies('in_theaters', page_limit = 50)
 
 		for film in theaters:
 			movie, created = Movie.objects.get_or_create(rt_id=film['id'])
