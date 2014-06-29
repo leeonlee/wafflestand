@@ -8,82 +8,85 @@
 		<title>{% block title %} {% endblock %}</title>
 	</head>
 	<body>
-		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="/">Waffle Stand</a>
-				</div>
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li {% if active == 'index' %}class="active"{% endif %}><a href="/">Box Office</a></li>
-						<li {% if active == 'comingSoon' %}class="active"{% endif %}><a href="/comingSoon">Coming Soon</a></li>
-						<li {% if active == 'freshOut' %}class="active"{% endif %}><a href="/freshOut">Fresh Out</a></li>
-						{% if user.is_authenticated %}
-							<li {% if active == 'myMovies' %}class="active"{% endif %}><a href="/myMovies">My Movies</a></li>
-						{% else %}
-							<li><a href="#loginmodal" id="login" data-toggle="modal">My Movies</a></li>	
-						{% endif %}
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-						{% if user.is_authenticated %}
-						<a href="/accounts/logout">Logout {{user.username}}</a>
-						{% else %}
-							<a href="#loginmodal" class="navbar-link navbar-right" id="login" data-toggle="modal">Log in</a>
-						{% endif %}
-						</li>
-					</ul>
-				</div><!--/.nav-collapse -->
-			</div>
-		</div>
-		<div class="modal fade bs-modal-sm" id="loginmodal" tabindex="-1" aria-hidden="true">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-body">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<ul class="nav nav-tabs">
-							<li class="active"><a href="#login-tab" data-toggle="tab">Login</a></li>
-							<li><a href="#register-tab" data-toggle="tab">Forgot Password?</a></li>
+		<div class="footer-fix">
+			<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/">Waffle Stand</a>
+					</div>
+					<div class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li {% if active == 'index' %}class="active"{% endif %}><a href="/">Box Office</a></li>
+							<li {% if active == 'comingSoon' %}class="active"{% endif %}><a href="/comingSoon">Coming Soon</a></li>
+							<li {% if active == 'freshOut' %}class="active"{% endif %}><a href="/freshOut">Fresh Out</a></li>
+							{% if user.is_authenticated %}
+								<li {% if active == 'myMovies' %}class="active"{% endif %}><a href="/myMovies">My Movies</a></li>
+							{% else %}
+								<li><a href="#loginmodal" id="login" data-toggle="modal">My Movies</a></li>	
+							{% endif %}
 						</ul>
-						<div class="tab-content">
-							<div class="tab-pane active" id="login-tab">
-								<form id="login_form" method="post">
-									<p class="text-danger" id="form-error"></p>
-									{% csrf_token %}
-									{{ login_form.as_p }}
-									<p>Not a user? <a href="/accounts/register">Start here.</a></p>	
-									<button type="submit" class="btn btn-primary">Login</button>
-								</form>
-							</div>
-							<div class="tab-pane" id="register-tab">
-								<form id="reset_form" method="post">
-									</br>
-									{% csrf_token %}
-									{{ reset_form.as_p }}
-									<p class="text-info" id="reset-message"></p>
-									<button type="submit" class="btn btn-primary">Submit</button>
-								</form>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+							{% if user.is_authenticated %}
+							<a href="/accounts/logout">Logout {{user.username}}</a>
+							{% else %}
+								<a href="#loginmodal" class="navbar-link navbar-right" id="login" data-toggle="modal">Log in</a>
+							{% endif %}
+							</li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div>
+			</div>
+			<div class="modal fade bs-modal-sm" id="loginmodal" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#login-tab" data-toggle="tab">Login</a></li>
+								<li><a href="#register-tab" data-toggle="tab">Forgot Password?</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="login-tab">
+									<form id="login_form" method="post">
+										<p class="text-danger" id="form-error"></p>
+										{% csrf_token %}
+										{{ login_form.as_p }}
+										<p>Not a user? <a href="/accounts/register">Start here.</a></p>	
+										<button type="submit" class="btn btn-primary">Login</button>
+									</form>
+								</div>
+								<div class="tab-pane" id="register-tab">
+									<form id="reset_form" method="post">
+										</br>
+										{% csrf_token %}
+										{{ reset_form.as_p }}
+										<p class="text-info" id="reset-message"></p>
+										<button type="submit" class="btn btn-primary">Submit</button>
+									</form>
+								</div>
 							</div>
 						</div>
-					</div>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
-
-		{% block content %} {% endblock %}
-		<div id="footer">
-			<div class="container">
-				<ul>
-					<li><a href="/" class="text-muted">The Team</a></li>
-					<li><a href="/" class="text-muted">Contact</a></li>
-					<li><a href="/" class="text-muted">Waffle Stand &copy;</a></li>
-				</ul>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<div class="content">
+				{% block content %} {% endblock %}
+			</div>
+			<div id="footer">
+				<div class="container">
+					<ul>
+						<li><a href="/" class="text-muted">The Team</a></li>
+						<li><a href="/" class="text-muted">Contact</a></li>
+						<li><a href="/" class="text-muted">Waffle Stand &copy;</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 
