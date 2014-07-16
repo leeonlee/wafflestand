@@ -23,10 +23,10 @@
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
 							<li {% if active == 'index' %}class="active"{% endif %}><a href="/">Box Office</a></li>
-							<li {% if active == 'comingSoon' %}class="active"{% endif %}><a href="/comingSoon">Coming Soon</a></li>
-							<li {% if active == 'freshOut' %}class="active"{% endif %}><a href="/freshOut">Fresh Out</a></li>
+							<li {% if active == 'comingSoon' %}class="active"{% endif %}><a href="?filter=comingSoon">Coming Soon</a></li>
+							<li {% if active == 'freshOut' %}class="active"{% endif %}><a href="?filter=freshOut">Fresh Out</a></li>
 							{% if user.is_authenticated %}
-								<li {% if active == 'myMovies' %}class="active"{% endif %}><a href="/myMovies">My Movies</a></li>
+								<li {% if active == 'myMovies' %}class="active"{% endif %}><a href="?filter=myMovies">My Movies</a></li>
 							{% else %}
 								<li><a href="#loginmodal" id="login" data-toggle="modal">My Movies</a></li>	
 							{% endif %}

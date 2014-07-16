@@ -7,8 +7,9 @@ from bluray.models import *
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
-def index(request, query = 'index'):
+def index(request):
 	movie_list = Movie.objects.all()
+	query = request.GET.get("filter", "index")
 	active = query
 
 	if query == 'comingSoon':

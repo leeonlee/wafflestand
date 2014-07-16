@@ -10,7 +10,7 @@ from registration.backends.default.views import RegistrationView
 urlpatterns = patterns('',
     url(r'^follow/$', views.follow, name='follow'),
     url(r'^loginview/$', views.loginview, name='login'),
-    url(r'logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
 
     url(r'^accounts/password/change/$', auth_views.password_change, name='password_change'),
     url(r'^accounts/password/change/done/$', auth_views.password_change_done, name='password_change_done'),
@@ -22,5 +22,4 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration.backends.default.urls')),
 
     url(r'^$', views.index, name='index'),
-    url(r'(?P<query>\w+)/$', views.index, name='index'),
 )
