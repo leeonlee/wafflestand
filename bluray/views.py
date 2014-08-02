@@ -42,6 +42,20 @@ def index(request, query = 'index'):
 
 	return render(request, 'bluray/index.html', context)
 
+def sortMovies(request):
+	context = {}
+	try:
+		if request.method == 'GET' and request.is_ajax():
+			GET = request.GET
+			button_value = GET['button_value']
+			movie_list = Movie.objects.filter(released=False).order_by(button_value)
+			context['movie_list'] = movie_list
+
+		response = json.dumps(context);
+	except Exception as e:
+		print e
+	return HttpResponse(response, content_type='application/json')
+
 # track button no longer shows up unless user is logged in
 def follow(request):
 	results = {'success':'False'}

@@ -11,7 +11,8 @@ urlpatterns = patterns('',
     url(r'^follow/$', views.follow, name='follow'),
     url(r'^loginview/$', views.loginview, name='login'),
     url(r'logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
-
+    url(r'^sortmovies/$', views.sortMovies, name='sortmovies'),
+    
     url(r'^accounts/password/change/$', auth_views.password_change, name='password_change'),
     url(r'^accounts/password/change/done/$', auth_views.password_change_done, name='password_change_done'),
     url(r'^accounts/password/reset/$', auth_views.password_reset, name='password_reset'),
