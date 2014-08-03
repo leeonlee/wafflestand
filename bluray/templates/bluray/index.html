@@ -6,69 +6,41 @@
 			<input class="btn" type="button" name="sort_by" value="release">
 			<input class="btn" type="button" name="sort_by" value="released">
 			<input class="btn" type="button" name="sort_by" value="name">
-		<div class="row">
-			{% for movie in movie_list %}
-				<div class="col-md-3">
-					<div class="movie-container container">
-						<div class="movie-name">
-							<div class="text-bottom">
-								<h3 class="text-center">{{movie.name}}</h3>
-							</div>
-						</div>
 
-						<div class="movie-release">
-							<p class="text-center">
-								{% if movie.release %}
-									{{movie.release|date:"M d Y"}}
-								{% else %}
-									No release date yet
-								{% endif %}
-							</p>
-						</div>
-
-						<div class="movie-poster">
-							{% if movie.poster %}
-								<img class="center-block movie-poster" src="{{movie.poster}}">
-							{% else %}
-								<img class="center-block movie-poster" src="{% static "img/poster-not-found-og.jpg" %}">
-							{% endif %}
-						</div>
-						{% if movie.released == False %}
-							<div class="movie-follow">
-								<!-- user authentication here -->
-								{% if user.is_active %}
-									{% if movie.name in user_tracking %}
-										<input type="button" value="Unfollow" class="btn btn-warning center-block" onclick="follow({{movie.rt_id}}, this)"/>
-									{% else %}
-										<input type="button" value="Follow" class="btn btn-success center-block" onclick="follow({{movie.rt_id}}, this)"/>
-									{% endif %}
-								{% else %}
-									<input type="button" class="btn btn-success center-block" value="Follow" data-toggle="modal" data-target="#loginmodal"/>
-								{% endif %}
-							</div>
-						{% endif %}
-					</div>
-				</div>
-				{% if forloop.counter|divisibleby:4 %}
-					</div>
-					<div class="row">
-				{% endif %}
-			{% endfor %}
-		</div>
-		<div id="test">
-		</div>
+			
 	</div> <!-- /container -->
+	<ul class="grid effect-6" id="grid">
+		{% for movie in movie_list %}
+			{% if movie.poster %}
+				<li><a href="/"><img class="movie-poster" src="{{movie.poster}}"></a></li>
+				<img src="">
+			{% else %}
+				<li><a href="/"><img class="movie-poster" src="{% static "img/poster-not-found-og.jpg" %}"></a></li>
+			{% endif %}
+		{% endfor %}
+	<ul>
 {% endblock %}
 {% block extrajs %}
+	<script type="text/javascript" src="{% static "js/masonry.pkgd.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/imagesLoaded.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/classie.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/AnimOnScroll.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/modernizr.custom.js" %}"></script>
 	<script type="text/javascript" src="{% static "js/index.js" %}"></script>
 	<script>
+		new AnimOnScroll(document.getElementById('grid'), {
+			minDuration: 0.4,
+			maxDuration: 0.7,
+			viewportFactor: 0.2,
+		});
+
 		$('.container input').click(function(){
 			var button_value = $(this).attr('value');
 			$.getJSON('/sortmovies/', {button_value: button_value}, function(results){
 				alert(1);
 			});
 			// $('.row').remove();
-			// .getJSON('', , function(){
+			// $.getJSON('', , function(){
 			// 	$('#test').append('{%spaceless%}<div class="row">{% for movie in movie_list %}<div class="col-md-3"><div class="movie-container container"><div class="movie-name"><div class="text-bottom"><h3 class="text-center">{{movie.name}}</h3></div></div><div class="movie-release"><p class="text-center">{% if movie.release %}{{movie.release|date:"M d Y"}}{% else %}No release date yet{% endif %}</p></div><div class="movie-poster">{% if movie.poster %}<img class="center-block movie-poster" src="{{movie.poster}}">{% else %}<img class="center-block movie-poster" src="{% static "img/poster-not-found-og.jpg" %}">{% endif %}</div>{% if movie.released == False %}<div class="movie-follow"><!-- user authentication here -->{% if user.is_active %}{% if movie.name in user_tracking %}<input type="button" value="Unfollow" class="btn btn-warning center-block" onclick="follow({{movie.rt_id}}, this)"/>{% else %}<input type="button" value="Follow" class="btn btn-success center-block" onclick="follow({{movie.rt_id}}, this)"/>{% endif %}{% else %}<input type="button" class="btn btn-success center-block" value="Follow" data-toggle="modal" data-target="#loginmodal"/>{% endif %}</div>{% endif %}</div></div>{% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}{% endfor %}</div>{%endspaceless%}');
 			// });
 		});

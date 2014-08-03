@@ -4,6 +4,8 @@
 	<head>
 		<link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" media="screen">
 		<link href="{% static "css/index.css" %}" rel="stylesheet" media="screen">
+		<link href="{% static "css/default.css" %}" rel="stylesheet" media="screen">
+		<link href="{% static "css/component.css" %}" rel="stylesheet" media="screen">
 		{% block extraheaders %} {% endblock %}
 		<title>{% block title %} {% endblock %}</title>
 	</head>
@@ -92,6 +94,7 @@
 
 		<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
 		<script type="text/javascript" src="{% static "bootstrap/js/bootstrap.js" %}"></script>
+		
 		<script type="text/javascript">
 
 			var _gaq = _gaq || [];
