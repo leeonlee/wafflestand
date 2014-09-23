@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize', #tag library
     'south', #migrations
     'registration',
+    'autocomplete_light',
 )
 #need to define site_id for django.contrib.sites
 SITE_ID = 1
