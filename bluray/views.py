@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 import json
 from bluray.models import *
+from bluray.forms import SearchForm
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
@@ -31,6 +32,7 @@ def index(request):
 		'login_form' : login_form,
 		'reset_form' : reset_form,
 		'active' : active,
+                'search_form': SearchForm(),
 	}
 
 	if request.user.is_authenticated():
